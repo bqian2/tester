@@ -8,9 +8,16 @@ class authentication_controller extends rest_controller{
     }
 
     public function handle_request() {
-        $uid = $_REQUEST["uid"];
-        $pwd = $_REQUEST["pwd"];
-        var_dump(array("uid"=>$uid, "pwd"=>$pwd));
+        $data = new stdClass();
+        if(array_key_exists("data", $_REQUEST))
+        {
+            $data = json_decode($_REQUEST["data"]);
+        }
+        if(array_key_exists("x-auth-token", $data)) {
+        }else if(array_key_exists("userid", $data) and
+                 array_key_exists("password", $data))
+        {
+        }
     }
 
 }

@@ -13,7 +13,15 @@ class user_controller extends rest_controller{
         {
             $data = json_decode($_REQUEST["data"]);
         }
-        print var_dump($data);
+
+        if(array_key_exists("x-auth-token", $data)) 
+        {
+
+        }elseif(array_key_exists("userid", $data) and 
+                 array_key_exists("password", $data))
+        {
+
+        }
     }
 
 }

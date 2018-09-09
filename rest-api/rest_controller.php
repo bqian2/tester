@@ -6,7 +6,16 @@
     abstract class rest_controller implements rest_controller_i {
         protected $method;
         protected $data;
+        protected $request;
+        protected $response;
+        protected $args;
         public abstract function require_authentication();
+
+        function __construct($request, $response, $args) {
+            $this->request = $request;
+            $this->response = $response;
+            $this->args = $args;
+        }
 
         public function is_authorized() {
             if(!$this->require_authentication()) {
@@ -31,6 +40,10 @@
 
         public function is_authenticated() {
             return true;
+        }
+        
+        public function authenticate() {
+
         }
 
         public function process() {
@@ -78,7 +91,7 @@
             print(json_encode($data));
         }
 
-        public abstract function handle_request();
+        // public abstract function handle_request();
 
     }
 

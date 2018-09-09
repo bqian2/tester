@@ -76,6 +76,15 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE create_list(IN u_seq_id bigint, IN name varchar(16), IN type varchar(4), OUT spl_id bigint)
+BEGIN
+     START TRANSACTION;
+     INSERT IGNORE INTO `sp_list` set sp_list.user_seq_id=u_seq_id, sp_list.name=name, sp_list.spl_type=type, sp_list.state='ct';
+     SELECT LAST_INSERT_ID() into @spl_id;
+     COMMIT;
+END //
+
 
 GRANT ALL PRIVILEGES ON db_main.* to 'bqian'@'localhost';
 GRANT ALL PRIVILEGES ON db_session.* to 'bqian'@'localhost';
